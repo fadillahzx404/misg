@@ -2,12 +2,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 const postId = 1;
 
@@ -25,7 +26,6 @@ const ArticleDetails = async () => {
             <div className="flex gap-5 divide-x pt-4 ">
               <div className="grid px-8">
                 <Table>
-                  <TableCaption>Article</TableCaption>
                   <TableHeader>
                     <TableRow>
                       <TableHead className="w-[100px]">id</TableHead>
@@ -34,7 +34,7 @@ const ArticleDetails = async () => {
                       <TableHead>short_text</TableHead>
                       <TableHead>image</TableHead>
                       <TableHead>external_image</TableHead>
-                      <TableHead>action</TableHead>
+                      <TableHead className="text-end">action</TableHead>
                     </TableRow>
                   </TableHeader>
 
@@ -47,13 +47,25 @@ const ArticleDetails = async () => {
                       <TableCell>{articles.post.title}</TableCell>
                       <TableCell>{articles.post.short_text}</TableCell>
                       <TableCell className="text-right">
-                        {articles.post.image}
+                        <img
+                          src={articles.post.image}
+                          className="rounded-md"
+                          alt=""
+                        />
                       </TableCell>
                       <TableCell className="text-right">
                         {articles.post.external_image}
                       </TableCell>
-                      <TableCell className="text-right">
-                        <a href="/article">Back</a>
+                      <TableCell className="text-end">
+                        <Link
+                          href="/article"
+                          className="hover:bg-yellow-100 hover:text-black transition-all duration-300 hover:scale-90"
+                        >
+                          <div className="flex gap-2 justify-center items-center bg-yellow-300 p-2 rounded-md">
+                            <ArrowLeft size={14} fill="black" />
+                            <p>Back</p>
+                          </div>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   </TableBody>

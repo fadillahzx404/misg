@@ -35,6 +35,7 @@ const AddArticle = async () => {
       }),
     });
     console.log(posted);
+    console.log(res.status);
     return redirect("/article");
   };
 

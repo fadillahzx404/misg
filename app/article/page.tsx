@@ -3,12 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ArrowRight, Edit2Icon, Trash2Icon } from "lucide-react";
 import Link from "next/link";
 
 interface Iposts {
@@ -39,7 +39,6 @@ const Article = async () => {
               <div className="flex gap-5 divide-x pt-4">
                 <div className="grid px-8">
                   <Table>
-                    <TableCaption>Article</TableCaption>
                     <TableHeader>
                       <TableRow>
                         <TableHead className="w-[100px]">id</TableHead>
@@ -48,7 +47,7 @@ const Article = async () => {
                         <TableHead>short_text</TableHead>
                         <TableHead>image</TableHead>
                         <TableHead>external_image</TableHead>
-                        <TableHead>action</TableHead>
+                        <TableHead className="text-end">action</TableHead>
                       </TableRow>
                     </TableHeader>
                     {articles.posts.map((post: Iposts) => {
@@ -61,14 +60,31 @@ const Article = async () => {
                             <TableCell>{post.user_id}</TableCell>
                             <TableCell>{post.title}</TableCell>
                             <TableCell>{post.short_text}</TableCell>
-                            <TableCell className="text-right">
-                              {post.image}
+                            <TableCell>
+                              <img src={post.image} className="rounded-md" />
                             </TableCell>
-                            <TableCell className="text-right">
-                              {post.external_image}
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <a href="/details">See</a>
+                            <TableCell>{post.external_image}</TableCell>
+                            <TableCell className="text-end">
+                              <div className="grid gap-2">
+                                <a href="/details">
+                                  <div className="flex gap-2 justify-center items-center bg-gray-400 p-2 rounded-md">
+                                    <p>Details</p>
+                                    <ArrowRight size={14} fill="black" />
+                                  </div>
+                                </a>
+                                <a href="/details">
+                                  <div className="flex gap-2 justify-center items-center  bg-yellow-400 p-2 rounded-md">
+                                    <p>Edit </p>
+                                    <Edit2Icon size={12} fill="black" />
+                                  </div>
+                                </a>
+                                <a href="/details">
+                                  <div className="flex gap-2 justify-center items-center  bg-red-400 p-2 rounded-md">
+                                    <p>Delete </p>
+                                    <Trash2Icon size={12} fill="black" />
+                                  </div>
+                                </a>
+                              </div>
                             </TableCell>
                           </TableRow>
                         </TableBody>
