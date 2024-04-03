@@ -1,0 +1,11 @@
+.ck.ck-editor__editable {
+    border-bottom-right-radius:  10px !important;
+    border-bottom-left-radius:  10px !important;
+}
+.ck.ck-toolbar.ck-toolbar_grouping{
+    border-top-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+}
+.ck.ck-reset.ck-editor.ck-rounded-corners{
+    grid-column: span 3;
+}

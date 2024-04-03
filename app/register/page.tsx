@@ -51,7 +51,12 @@ export default function Register() {
           <CardContent>
             <div className="flex gap-5 divide-x pt-4">
               <div className="grid justify-center items-center">
-                <p>Logo</p>
+                <img
+                  src="https://img.freepik.com/free-vector/annotation-concept-illustration_114360-5319.jpg?w=740&t=st=1706756335~exp=1706756935~hmac=23d1b78399cd2bdef7592d8cd024f5658308f7a5d6ead6e4b6b09821fa148d45"
+                  alt=""
+                  width={400}
+                  height={400}
+                />
               </div>
 
               <div className="grid px-8">

@@ -1,7 +1,10 @@
+"use client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
+import { redirect } from "next/navigation";
+
+import ErrorParam from "@/components/ErrorParam";
 import {
   Card,
   CardContent,
@@ -13,16 +16,13 @@ import { Label } from "@/components/ui/label";
 
 export default function Login() {
   const signIn = async (formData: FormData) => {
-    "use server";
-
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
     if (email == "user@gmail.com" && password == "12345678") {
       return redirect("/article");
     }
-
-    return redirect("/login");
+    return redirect("/login?message=Check your email or password input.");
   };
 
   return (
@@ -39,7 +39,12 @@ export default function Login() {
           <CardContent>
             <div className="flex gap-5 divide-x pt-4">
               <div className="grid justify-center items-center">
-                <p>Logo</p>
+                <img
+                  src="https://img.freepik.com/free-vector/hand-drawn-essay-illustration_23-2150268421.jpg?w=740&t=st=1706560593~exp=1706561193~hmac=f3333f0ba82f3b7e69cd22dde4817169a1d70e5dcb5044601cc40062b822a92d"
+                  alt=""
+                  width={300}
+                  height={300}
+                />
               </div>
 
               <div className="grid px-8">
@@ -50,8 +55,10 @@ export default function Login() {
                   <CardDescription className="text-center pt-4">
                     Please input your email and password to continue.
                   </CardDescription>
-
-                  <div className="grid space-y-4 pt-6">
+                  <div className="text-sm pt-2">
+                    <ErrorParam />
+                  </div>
+                  <div className="grid space-y-4 pt-4">
                     {/* Email Input */}
 
                     <div className="form-control space-y-1">
@@ -83,7 +90,11 @@ export default function Login() {
                         Don't Have Account? Register Here.
                       </Link>
                     </div>
-                    <Button className="bg-blue-500 hover:bg-blue-300 hover:text-black transition-all duration-300 hover:scale-90">
+
+                    <Button
+                      className="bg-blue-500 hover:bg-blue-300 hover:text-black transition-all duration-300 hover:scale-90"
+                      type="submit"
+                    >
                       Login
                     </Button>
                   </div>

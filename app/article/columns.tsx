@@ -25,17 +25,11 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Iposts } from "./model";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Iposts = {
-  id: number;
-  user_id: number;
-  title: string;
-  short_text: string;
-  image: string;
-  external_image: number;
-};
+
 
 export const columns: ColumnDef<Iposts>[] = [
   {
