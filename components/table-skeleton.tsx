@@ -21,21 +21,23 @@ const TableSkleton = () => {
               </TableHead>
             ))}
             <TableHead className="float-right place-content-center">
-              <Skeleton className="w-[100px] h-[20px] rounded-full" />
+              <Skeleton className="w-[50px] h-[20px] rounded-full" />
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            {[...Array(4)].map((x, i) => (
-              <TableCell>
-                <Skeleton className="w-[100px] h-[20px] rounded-full" />
+          {[...Array(5)].map((x, i) => (
+            <TableRow>
+              {[...Array(4)].map((x, i) => (
+                <TableCell>
+                  <Skeleton className="w-[100px] h-[40px] rounded-full" />
+                </TableCell>
+              ))}
+              <TableCell className="float-right">
+                <Skeleton className="w-[50px] h-[40px] rounded-full" />
               </TableCell>
-            ))}
-            <TableCell className="float-right">
-              <Skeleton className="w-[100px] h-[20px] rounded-full" />
-            </TableCell>
-          </TableRow>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>

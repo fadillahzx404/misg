@@ -58,20 +58,28 @@ const ArticleEdit = ({ params }: { params: { articleId: number } }) => {
 
   return (
     <div className="flex flex-col bg-slate-200 min-w-full min-h-screen login relative">
-      <p className="text-black text-4xl text-center underline my-5">
-        Edit Post {postId}
-      </p>
+      <div className="absolute -top-10 left-96 bg-blue-300 h-96 w-2 rounded-md"></div>
+      <div className="absolute bottom-0 right-96 bg-blue-300 h-96 w-2 rounded-md"></div>
+      <div className="absolute top-10 left-36 bg-blue-300 h-4/5 w-2 rounded-md z-10"></div>
+      <div className="absolute top-10 right-36 bg-blue-300 h-4/5 w-2 rounded-md z-10"></div>
+      <div className="absolute top-36 right-0 bg-blue-300 h-2 w-3/5 rounded-md z-10"></div>
+      <div className="absolute bottom-44 left-0 bg-blue-300 h-2 w-3/5 rounded-md z-10"></div>
+
+      {!loading ? (
+        <p className="font-bold text-blue-500 text-5xl text-center underline underline-offset-8 decoration-2 my-5">
+          Edit Post {postId}
+        </p>
+      ) : (
+        <div className="my-5 self-center">
+          <Button disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please Wait Data Still Process !
+          </Button>
+        </div>
+      )}
       <div className="flex z-20 mx-20 justify-center">
         <Card className="px-4 drop-shadow-[0_20px_20px_rgba(2,132,199,0.25)]">
           <CardContent className="p-8">
-            {!loading ? (
-              ""
-            ) : (
-              <Button disabled>
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-                Please Wait Data Still Process !
-              </Button>
-            )}
             <form action={editEd}>
               <div className="flex gap-4">
                 <div className="grid gap-4 py-4">
@@ -138,7 +146,6 @@ const ArticleEdit = ({ params }: { params: { articleId: number } }) => {
                             const data = editor.getData();
                             SetTextEditor(data);
                           }}
-                          
                         />
                         <input
                           type="hidden"
@@ -177,21 +184,25 @@ const ArticleEdit = ({ params }: { params: { articleId: number } }) => {
                   <Skeleton className="w-56 h-12/12 rounded-lg" />
                 )}
               </div>
-              <div className="flex float-right my-4 gap-3">
-                <Link
-                  href="/article"
-                  className="py-1.5 px-2 font-medium bg-yellow-400 rounded-md transition-all duration-300 hover:scale-90"
-                >
-                  Back
-                </Link>
-                <Button
-                  type="submit"
-                  className="transition-all duration-300 hover:scale-90"
-                  variant="default"
-                >
-                  Edit
-                </Button>
-              </div>
+              {!loading ? (
+                <div className="flex float-right my-4 gap-3">
+                  <Link
+                    href="/article"
+                    className="py-1.5 px-2 font-medium bg-yellow-400 rounded-md transition-all duration-300 hover:scale-90"
+                  >
+                    Back
+                  </Link>
+                  <Button
+                    type="submit"
+                    className="transition-all duration-300 hover:scale-90"
+                    variant="default"
+                  >
+                    Edit
+                  </Button>
+                </div>
+              ) : (
+                ""
+              )}
             </form>
           </CardContent>
         </Card>

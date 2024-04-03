@@ -1,6 +1,6 @@
 "use server";
 
-import { permanentRedirect, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const baseurl = "https://app-devuat.msig.co.id/sample-api/api/v1/posts";
 
@@ -32,7 +32,7 @@ export async function addPost(formData: FormData) {
   let formObject = Object.fromEntries(formData.entries());
   console.log(formObject);
 
-  return permanentRedirect(
+  return redirect(
     "/article?message=Data has been added, but it's not on the list !"
   );
 }
