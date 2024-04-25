@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 
 import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Register() {
   //FORM
@@ -36,6 +36,10 @@ export default function Register() {
     } else {
     }
   };
+
+  useEffect(() => {
+    document.title = "Register";
+  }, []);
 
   return (
     <div className="flex flex-col bg-slate-200 min-w-full min-h-screen login relative">

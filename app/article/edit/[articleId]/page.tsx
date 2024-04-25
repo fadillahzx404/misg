@@ -52,6 +52,7 @@ const ArticleEdit = ({ params }: { params: { articleId: number } }) => {
   const [texteditor, SetTextEditor] = useState("");
 
   useEffect(() => {
+    document.title = `Edit Article | User Id ${postId}`;
     fecthPost();
     SetTextEditor;
   }, []);

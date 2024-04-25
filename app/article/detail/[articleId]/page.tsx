@@ -51,6 +51,7 @@ const ArticleDetails = ({ params }: { params: { articleId: number } }) => {
   };
 
   useEffect(() => {
+    document.title = `Show Article | User Id ${postId}`;
     fecthPost();
   }, []);
 

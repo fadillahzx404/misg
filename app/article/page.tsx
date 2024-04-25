@@ -22,16 +22,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { ExitIcon, PlusIcon, ReloadIcon } from "@radix-ui/react-icons";
+
 import "@/app/ckEditor.css";
 import TableSkleton from "@/components/table-skeleton";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { addPost } from "./article-provider";
 import { Iposts } from "./model";
 
-const Article = () => {
+const ArticlePage = () => {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
   const router = useRouter();
@@ -57,6 +58,7 @@ const Article = () => {
   };
 
   useEffect(() => {
+    document.title = "Article";
     fecthPosts();
     if (message !== null) {
       toast(`${message}`, {
@@ -85,10 +87,20 @@ const Article = () => {
         <Card>
           <CardContent className="grid">
             {!loading && postsData ? (
-              <div>
+              <div className="flex  justify-between">
+                <Button
+                  className="bg-blue-600 hover:bg-blue-900 hover:scale-90 transition-all duration-300 my-4"
+                  onClick={() => router.replace("/")}
+                >
+                  <ExitIcon className="mr-2 h-4 w-4" />
+                  Log out
+                </Button>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="float-right my-4">Add article</Button>
+                    <Button className="bg-blue-600 hover:bg-blue-900 float-right my-4 hover:scale-90 duration-300 transition-all">
+                      <PlusIcon className="mr-2 h-4 w-4" />
+                      Add article
+                    </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:min-w-lg">
                     <form className="grid gap-4 py-4" action={addPost}>
@@ -130,7 +142,10 @@ const Article = () => {
               </div>
             ) : (
               <div className="justify-self-end my-4">
-                <Skeleton className=" w-[100px] h-[20px] rounded-full" />
+                <Button disabled>
+                  <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </Button>
               </div>
             )}
             {loading && <TableSkleton />}
@@ -144,4 +159,4 @@ const Article = () => {
   );
 };
 
-export default Article;
+export default ArticlePage;

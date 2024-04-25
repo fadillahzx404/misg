@@ -1,6 +1,11 @@
 "use client";
 
-import { CaretSortIcon } from "@radix-ui/react-icons";
+import {
+  CaretSortIcon,
+  EyeOpenIcon,
+  Pencil2Icon,
+  TrashIcon,
+} from "@radix-ui/react-icons";
 
 import {
   AlertDialog,
@@ -23,13 +28,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Iposts } from "./model";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-
 
 export const columns: ColumnDef<Iposts>[] = [
   {
@@ -132,7 +137,9 @@ export const columns: ColumnDef<Iposts>[] = [
   },
   {
     accessorKey: "action",
-    header: "Action",
+    header: ({ column }) => {
+      return <p className="text-center">Action</p>;
+    },
     cell: ({ row }) => {
       const posts = row.original;
       const router = useRouter();
@@ -140,28 +147,35 @@ export const columns: ColumnDef<Iposts>[] = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Action</span>
-              <MoreHorizontal className="h-4 w-4" />
+            <Button className="p-2 bg-white shadow-md border-none focus-visible:ring-white text-black hover:scale-90 transition-all duration-300 hover:bg-blue-300 place-items-center">
+              <span className="pr-2">Action</span>
+              <ChevronDown className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-center">
+              Actions
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => router.push(`/article/detail/${posts.id}`)}
+              className="focus:bg-blue-300 hover:font-bold"
             >
-              Details
+              <EyeOpenIcon className="mr-2 h-4 w-4" />
+              Detail
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={() => router.push(`/article/edit/${posts.id}`)}
+              className="focus:bg-yellow-300 hover:font-bold"
             >
+              <Pencil2Icon className="mr-2 h-4 w-4" />
               Edit
             </DropdownMenuItem>
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className="py-4 h-2 w-full pl-2 hover:bg-accent  justify-start text-sm bg-white text-black font-normal">
+                <Button className="py-4 h-2 w-full pl-2 hover:font-bold hover:bg-red-300 border-none shadow-none justify-start text-sm bg-white text-black font-normal">
+                  <TrashIcon className="mr-2 h-4 w-4" />
                   Delete
                 </Button>
               </AlertDialogTrigger>
@@ -175,7 +189,18 @@ export const columns: ColumnDef<Iposts>[] = [
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction className="bg-red-800 hover:bg-red-600 hover:sclae-90 transition-all duration-300">
+                  <AlertDialogAction
+                    className="bg-red-800 hover:bg-red-600 hover:sclae-90 transition-all duration-300"
+                    onClick={() => {
+                      toast("Data Has Been Deleted.", {
+                        description: `${Date()}`,
+                        action: {
+                          label: "Oke",
+                          onClick: () => {},
+                        },
+                      });
+                    }}
+                  >
                     Continue
                   </AlertDialogAction>
                 </AlertDialogFooter>

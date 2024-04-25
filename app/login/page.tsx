@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useEffect } from "react";
 
 export default function Login() {
   const signIn = async (formData: FormData) => {
@@ -24,6 +25,10 @@ export default function Login() {
     }
     return redirect("/login?message=Check your email or password input.");
   };
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   return (
     <div className="flex flex-col bg-slate-200 min-w-full min-h-screen login relative">
